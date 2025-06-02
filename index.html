@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Red Panda Finance offers tailored mortgage solutions for home buyers and investors in Melbourne, Victoria.">
+    <meta name="keywords" content="mortgage broker, Melbourne, home loans, refinancing, investment loans">
+    <meta property="og:title" content="Red Panda Finance | Melbourne Mortgage Brokers">
+    <meta property="og:description"
+        content="Helping home buyers and investors navigate their property journey with smart, tailored solutions.">
+    <meta property="og:image" content="https://img.icons8.com/color/48/red-panda.png">
+    <title>Red Panda Finance | Melbourne Mortgage Brokers</title>
+    <!-- <link rel="icon" href="https://img.icons8.com/color/48/red-panda.png" type="image/png"> -->
+    <link rel="icon" type="image/x-icon" href="/mainlogo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#CD1C26',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #CD1C26;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section {
+            scroll-margin-top: 100px;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .calculator-tab {
+            transition: all 0.3s ease;
+        }
+
+        .calculator-tab.active {
+            background-color: #CD1C26;
+            color: white;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #CD1C26;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="logo rounded-full flex items-center justify-center text-white font-bold text-xl mr-2">
+                    <img src="/mainlogo.png" alt="Red Panda Finance Logo" class="w-full h-full object-contain">
+                </div>
+                <span class="text-xl font-bold text-gray-800 ms-1">Red Panda Finance</span>
+            </div>
+
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-700 hover:text-primary transition">Home</a>
+                <a href="#services" class="nav-link text-gray-700 hover:text-primary transition">Services</a>
+                <a href="#calculators" class="nav-link text-gray-700 hover:text-primary transition">Calculators</a>
+                <a href="#about" class="nav-link text-gray-700 hover:text-primary transition">About</a>
+                <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary transition">Testimonials</a>
+                <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition">Contact</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition">Home</a>
+            <a href="#services" class="block py-2 text-gray-700 hover:text-primary transition">Services</a>
+            <a href="#calculators" class="block py-2 text-gray-700 hover:text-primary transition">Calculators</a>
+            <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition">About</a>
+            <a href="#testimonials" class="block py-2 text-gray-700 hover:text-primary transition">Testimonials</a>
+            <a href="#contact" class="block py-2 text-gray-700 hover:text-primary transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero section h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 text-white">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Smart Mortgage Solutions for Melbourne Homebuyers</h1>
+                <p class="text-xl mb-8">Helping home buyers and investors navigate their property journey with smart,
+                    tailored solutions.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact"
+                        class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center">Get
+                        Pre-Approved</a>
+                    <a href="tel:+61484941980"
+                        class="bg-transparent hover:bg-white hover:text-primary border-2 border-white text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center">
+                        <i class="fas fa-phone-alt mr-2"></i> (0484) 941 980
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Mortgage Services</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive mortgage solutions tailored to Melbourne's
+                    property market.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="loan-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-home text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Home Loans</h3>
+                    <p class="text-gray-600 mb-4">Competitive home loan options for first-time buyers and upgraders
+                        across Melbourne's property market.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline">Learn More →</a>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="loan-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-sync-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Refinancing</h3>
+                    <p class="text-gray-600 mb-4">Lower your interest rate, reduce monthly payments, or access equity
+                        with our refinance solutions.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline">Learn More →</a>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="loan-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-building text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Investment Loans</h3>
+                    <p class="text-gray-600 mb-4">Specialized property investment loans to help grow your portfolio in
+                        Melbourne and beyond.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline">Learn More →</a>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="loan-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Financial Guidance</h3>
+                    <p class="text-gray-600 mb-4">Personalized advice to help you make informed decisions about your
+                        property journey.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline">Learn More →</a>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="loan-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-user-tie text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">First Home Buyers</h3>
+                    <p class="text-gray-600 mb-4">Special programs and guidance for those entering Melbourne's
+                        competitive property market.</p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline">Learn More →</a>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="loan-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-hand-holding-usd text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Construction Loans</h3>
+                    <p class="text-gray-600 mb-4">Tailored financing solutions for building your dream home in Victoria.
+                    </p>
+                    <a href="#contact" class="text-primary font-semibold hover:underline">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section id="calculators" class="section py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Mortgage Calculators</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Use our calculators to estimate your mortgage payments,
+                    borrowing power, and costs.</p>
+            </div>
+
+            <!-- Calculator Tabs -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex rounded-md shadow-sm">
+                    <button id="repayment-tab"
+                        class="calculator-tab active px-6 py-3 text-sm font-medium rounded-l-lg border border-gray-300">
+                        Loan Repayment
+                    </button>
+                    <button id="borrowing-tab"
+                        class="calculator-tab px-6 py-3 text-sm font-medium border-t border-b border-gray-300">
+                        Borrowing Power
+                    </button>
+                    <button id="stamp-duty-tab"
+                        class="calculator-tab px-6 py-3 text-sm font-medium rounded-r-lg border border-gray-300">
+                        Stamp Duty
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calculator Content -->
+            <div class="bg-gray-50 rounded-xl shadow-md p-8">
+                <!-- Repayment Calculator -->
+                <div id="repayment-calculator" class="calculator-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="mb-6">
+                                <label for="loan-amount" class="block text-gray-700 font-medium mb-2">Loan Amount
+                                    ($)</label>
+                                <input type="range" id="loan-amount" min="100000" max="2000000" step="10000"
+                                    value="500000" class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>$100,000</span>
+                                    <span id="loan-amount-value" class="font-bold">$500,000</span>
+                                    <span>$2,000,000</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="interest-rate" class="block text-gray-700 font-medium mb-2">Interest Rate
+                                    (%)</label>
+                                <input type="range" id="interest-rate" min="1" max="10" step="0.1" value="5.5"
+                                    class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>1%</span>
+                                    <span id="interest-rate-value" class="font-bold">5.5%</span>
+                                    <span>10%</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="loan-term" class="block text-gray-700 font-medium mb-2">Loan Term
+                                    (years)</label>
+                                <input type="range" id="loan-term" min="5" max="30" step="1" value="25"
+                                    class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>5 years</span>
+                                    <span id="loan-term-value" class="font-bold">25 years</span>
+                                    <span>30 years</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Repayment Summary</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Monthly Payment</span>
+                                    <span id="monthly-payment" class="font-bold text-primary text-lg">$3,078.59</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Total Interest</span>
+                                    <span id="total-interest" class="font-bold text-gray-800">$423,577.84</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Total Repayment</span>
+                                    <span id="total-repayment" class="font-bold text-gray-800">$923,577.84</span>
+                                </div>
+                                <div class="pt-4">
+                                    <p class="text-sm text-gray-500">Calculations are estimates only. Actual repayments
+                                        may vary based on lender policies and fees.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Borrowing Power Calculator -->
+                <div id="borrowing-calculator" class="calculator-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="mb-6">
+                                <label for="annual-income" class="block text-gray-700 font-medium mb-2">Annual Income
+                                    ($)</label>
+                                <input type="range" id="annual-income" min="50000" max="300000" step="5000"
+                                    value="100000" class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>$50,000</span>
+                                    <span id="annual-income-value" class="font-bold">$100,000</span>
+                                    <span>$300,000</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="other-income" class="block text-gray-700 font-medium mb-2">Other Income
+                                    ($)</label>
+                                <input type="range" id="other-income" min="0" max="100000" step="1000" value="0"
+                                    class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>$0</span>
+                                    <span id="other-income-value" class="font-bold">$0</span>
+                                    <span>$100,000</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="expenses" class="block text-gray-700 font-medium mb-2">Monthly Expenses
+                                    ($)</label>
+                                <input type="range" id="expenses" min="1000" max="10000" step="100" value="3000"
+                                    class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>$1,000</span>
+                                    <span id="expenses-value" class="font-bold">$3,000</span>
+                                    <span>$10,000</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="interest-rate-borrowing"
+                                    class="block text-gray-700 font-medium mb-2">Interest Rate (%)</label>
+                                <input type="range" id="interest-rate-borrowing" min="1" max="10" step="0.1" value="5.5"
+                                    class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>1%</span>
+                                    <span id="interest-rate-borrowing-value" class="font-bold">5.5%</span>
+                                    <span>10%</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="loan-term-borrowing" class="block text-gray-700 font-medium mb-2">Loan Term
+                                    (years)</label>
+                                <input type="range" id="loan-term-borrowing" min="5" max="30" step="1" value="25"
+                                    class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>5 years</span>
+                                    <span id="loan-term-borrowing-value" class="font-bold">25 years</span>
+                                    <span>30 years</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Borrowing Summary</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Estimated Borrowing Power</span>
+                                    <span id="borrowing-power" class="font-bold text-primary text-lg">$650,000</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Estimated Monthly Repayment</span>
+                                    <span id="estimated-repayment" class="font-bold text-gray-800">$4,000</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Loan to Value Ratio (LVR)</span>
+                                    <span id="lvr" class="font-bold text-gray-800">80%</span>
+                                </div>
+                                <div class="pt-4">
+                                    <p class="text-sm text-gray-500">This is an estimate only. Your actual borrowing
+                                        capacity may vary based on lender policies, credit history, and other factors.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stamp Duty Calculator -->
+                <div id="stamp-duty-calculator" class="calculator-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="mb-6">
+                                <label for="property-value" class="block text-gray-700 font-medium mb-2">Property Value
+                                    ($)</label>
+                                <input type="range" id="property-value" min="100000" max="3000000" step="10000"
+                                    value="750000" class="w-full mb-2">
+                                <div class="flex justify-between">
+                                    <span>$100,000</span>
+                                    <span id="property-value-value" class="font-bold">$750,000</span>
+                                    <span>$3,000,000</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="property-type" class="block text-gray-700 font-medium mb-2">Property
+                                    Type</label>
+                                <select id="property-type"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="established">Established Home</option>
+                                    <option value="new">New Home</option>
+                                    <option value="vacant-land">Vacant Land</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="first-home-buyer" class="block text-gray-700 font-medium mb-2">First Home
+                                    Buyer?</label>
+                                <select id="first-home-buyer"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="state" class="block text-gray-700 font-medium mb-2">State</label>
+                                <select id="state"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="vic" selected>Victoria</option>
+                                    <option value="nsw">New South Wales</option>
+                                    <option value="qld">Queensland</option>
+                                    <option value="wa">Western Australia</option>
+                                    <option value="sa">South Australia</option>
+                                    <option value="tas">Tasmania</option>
+                                    <option value="act">ACT</option>
+                                    <option value="nt">Northern Territory</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Stamp Duty Summary</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Stamp Duty</span>
+                                    <span id="stamp-duty-amount" class="font-bold text-primary text-lg">$40,070</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">First Home Buyer Concession</span>
+                                    <span id="concession" class="font-bold text-gray-800">$0</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-2">
+                                    <span class="text-gray-600">Total Payable</span>
+                                    <span id="total-payable" class="font-bold text-gray-800">$40,070</span>
+                                </div>
+                                <div class="pt-4">
+                                    <p class="text-sm text-gray-500">Calculations are estimates based on current rates.
+                                        Additional fees may apply. First home buyer concessions vary by state.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Red Panda Finance team" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Red Panda Finance</h2>
+                    <div class="w-20 h-1 bg-primary mb-6"></div>
+                    <p class="text-gray-600 mb-6">Based in Melbourne, Victoria, Red Panda Finance is your trusted local
+                        mortgage broker. We specialize in helping home buyers and investors navigate the complex
+                        Australian property market with smart, tailored financial solutions.</p>
+
+                    <div class="mb-8">
+                        <div class="flex items-start mb-4">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-primary bg-opacity-10">
+                                    <i class="fas fa-check text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800 font-medium">Access to 50+ lenders across Australia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-primary bg-opacity-10">
+                                    <i class="fas fa-check text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800 font-medium">Deep knowledge of Melbourne's property market</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-primary bg-opacity-10">
+                                    <i class="fas fa-check text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800 font-medium">Personalized service with your best interests at
+                                    heart</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact"
+                            class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 text-center">Get
+                            Started</a>
+                        <a href="tel:+61484941980"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 text-center">
+                            <i class="fas fa-phone-alt mr-2"></i> (0484) 941 980
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Clients Say</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hear from Melbourne homeowners who've worked with us.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Red Panda Finance made buying our first home in Melbourne so much
+                        easier. They explained everything clearly and found us a great rate that beat the banks.
+                        Couldn't recommend them enough!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah K."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah K.</h4>
+                            <p class="text-gray-500">First home buyer, Brunswick</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"As an investor, I needed someone who understood the Melbourne market.
+                        Red Panda Finance secured me better terms than I could find anywhere else for my property
+                        portfolio."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael T.</h4>
+                            <p class="text-gray-500">Property investor, South Yarra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"We refinanced with Red Panda and saved $450/month on our mortgage!
+                        Their team was responsive, professional, and made the process incredibly easy. Will definitely
+                        use them again."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jennifer L."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Jennifer L.</h4>
+                            <p class="text-gray-500">Homeowner, Footscray</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-20 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+                <div class="w-20 h-1 bg-white bg-opacity-50 mx-auto mb-4"></div>
+                <p class="max-w-2xl mx-auto opacity-90">Contact us today for a free consultation and personalized
+                    mortgage solution.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-8">
+                        <div class="mb-6">
+                            <label for="name" class="block mb-2 font-medium">Full Name</label>
+                            <input type="text" id="name"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 placeholder-white placeholder-opacity-70"
+                                placeholder="John Smith">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block mb-2 font-medium">Email Address</label>
+                            <input type="email" id="email"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 placeholder-white placeholder-opacity-70"
+                                placeholder="john@example.com">
+                        </div>
+                        <div class="mb-6">
+                            <label for="phone" class="block mb-2 font-medium">Phone Number</label>
+                            <input type="tel" id="phone"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 placeholder-white placeholder-opacity-70"
+                                placeholder="(555) 123-4567">
+                        </div>
+                        <div class="mb-6">
+                            <label for="loan-type" class="block mb-2 font-medium">Loan Type</label>
+                            <select id="loan-type"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 appearance-none">
+                                <option value="" disabled selected>Select loan type</option>
+                                <option value="purchase">Home Purchase</option>
+                                <option value="refinance">Refinance</option>
+                                <option value="investment">Investment Property</option>
+                                <option value="construction">Construction Loan</option>
+                                <option value="first-home">First Home Buyer</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block mb-2 font-medium">How Can We Help?</label>
+                            <textarea id="message" rows="4"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 placeholder-white placeholder-opacity-70"
+                                placeholder="Tell us about your mortgage needs..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-white text-primary hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition duration-300">Submit
+                            Request</button>
+                    </form>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-8 h-full">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+
+                        <div class="mb-8">
+                            <div class="flex items-start mb-6">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg mb-1">Our Office</h4>
+                                    <p class="opacity-90">8 Vestige Street<br>Melbourne VIC 3064</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start mb-6">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg mb-1">Call Us</h4>
+                                    <p class="opacity-90">(0484) 941 980<br>Mon-Fri: 9am - 6pm AEST</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start mb-6">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg mb-1">Email Us</h4>
+                                    <p class="opacity-90">inquiry@redpandafinance.com<br>Response within 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://facebook.com/redpanda.finance" target="_blank"
+                                    class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://instagram.com/redpanda.finance" target="_blank"
+                                    class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center mb-4">
+                        <div
+                            class="logo bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-2">
+                            <img src="/mainlogo.png" alt="Red Panda Finance Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xl font-bold">Red Panda Finance</span>
+                    </div>
+                    <p class="text-gray-400 max-w-xs">Helping home buyers and investors navigate their property journey
+                        with smart, tailored solutions.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                            <li><a href="#calculators" class="text-gray-400 hover:text-white transition">Calculators</a>
+                            </li>
+                            <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                            <li><a href="#testimonials"
+                                    class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Services</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Home Loans</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Refinancing</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Investment Loans</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">First Home Buyers</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Construction Loans</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Licenses</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Disclosures</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Red Panda Finance. All rights reserved. Australian Credit
+                    License: 12345678</p>
+                <div class="flex space-x-6">
+                    <a href="https://facebook.com/redpanda.finance" target="_blank"
+                        class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com/redpanda.finance" target="_blank"
+                        class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Scroll spy for navigation
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Calculator Tab Switching
+        const calculatorTabs = {
+            'repayment-tab': 'repayment-calculator',
+            'borrowing-tab': 'borrowing-calculator',
+            'stamp-duty-tab': 'stamp-duty-calculator'
+        };
+
+        Object.entries(calculatorTabs).forEach(([tabId, contentId]) => {
+            const tab = document.getElementById(tabId);
+            const content = document.getElementById(contentId);
+
+            tab.addEventListener('click', () => {
+                // Hide all calculator contents
+                document.querySelectorAll('.calculator-content').forEach(el => {
+                    el.classList.add('hidden');
+                });
+
+                // Remove active class from all tabs
+                document.querySelectorAll('.calculator-tab').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                // Show selected content and mark tab as active
+                content.classList.remove('hidden');
+                tab.classList.add('active');
+            });
+        });
+
+        // Repayment Calculator Logic
+        const loanAmountInput = document.getElementById('loan-amount');
+        const interestRateInput = document.getElementById('interest-rate');
+        const loanTermInput = document.getElementById('loan-term');
+
+        const loanAmountValue = document.getElementById('loan-amount-value');
+        const interestRateValue = document.getElementById('interest-rate-value');
+        const loanTermValue = document.getElementById('loan-term-value');
+
+        const monthlyPayment = document.getElementById('monthly-payment');
+        const totalInterest = document.getElementById('total-interest');
+        const totalRepayment = document.getElementById('total-repayment');
+
+        function calculateRepayment() {
+            const loanAmount = parseFloat(loanAmountInput.value);
+            const interestRate = parseFloat(interestRateInput.value) / 100 / 12;
+            const loanTerm = parseFloat(loanTermInput.value) * 12;
+
+            // Calculate monthly payment
+            const x = Math.pow(1 + interestRate, loanTerm);
+            const monthly = (loanAmount * x * interestRate) / (x - 1);
+
+            // Calculate totals
+            const total = monthly * loanTerm;
+            const totalInt = total - loanAmount;
+
+            // Update display
+            monthlyPayment.textContent = `$${monthly.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+            totalInterest.textContent = `$${totalInt.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+            totalRepayment.textContent = `$${total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+        }
+
+        loanAmountInput.addEventListener('input', () => {
+            loanAmountValue.textContent = `$${parseInt(loanAmountInput.value).toLocaleString()}`;
+            calculateRepayment();
+        });
+
+        interestRateInput.addEventListener('input', () => {
+            interestRateValue.textContent = `${parseFloat(interestRateInput.value).toFixed(1)}%`;
+            calculateRepayment();
+        });
+
+        loanTermInput.addEventListener('input', () => {
+            loanTermValue.textContent = `${parseInt(loanTermInput.value)} years`;
+            calculateRepayment();
+        });
+
+        // Initialize repayment calculator
+        calculateRepayment();
+
+        // Borrowing Power Calculator Logic
+        const annualIncomeInput = document.getElementById('annual-income');
+        const otherIncomeInput = document.getElementById('other-income');
+        const expensesInput = document.getElementById('expenses');
+        const interestRateBorrowingInput = document.getElementById('interest-rate-borrowing');
+        const loanTermBorrowingInput = document.getElementById('loan-term-borrowing');
+
+        const annualIncomeValue = document.getElementById('annual-income-value');
+        const otherIncomeValue = document.getElementById('other-income-value');
+        const expensesValue = document.getElementById('expenses-value');
+        const interestRateBorrowingValue = document.getElementById('interest-rate-borrowing-value');
+        const loanTermBorrowingValue = document.getElementById('loan-term-borrowing-value');
+
+        const borrowingPower = document.getElementById('borrowing-power');
+        const estimatedRepayment = document.getElementById('estimated-repayment');
+        const lvr = document.getElementById('lvr');
+
+        function calculateBorrowingPower() {
+            const annualIncome = parseFloat(annualIncomeInput.value);
+            const otherIncome = parseFloat(otherIncomeInput.value);
+            const expenses = parseFloat(expensesInput.value);
+            const interestRate = parseFloat(interestRateBorrowingInput.value) / 100 / 12;
+            const loanTerm = parseFloat(loanTermBorrowingInput.value) * 12;
+
+            // Simple calculation (in reality this would be more complex)
+            const totalIncome = annualIncome + otherIncome;
+            const disposableIncome = (totalIncome / 12) - expenses;
+
+            // Estimate borrowing power (using a simplified 30% rule)
+            const estimatedBorrowing = (disposableIncome * 0.3) * (loanTerm / interestRate);
+
+            // Calculate estimated monthly repayment for this amount
+            const x = Math.pow(1 + interestRate, loanTerm);
+            const monthly = (estimatedBorrowing * x * interestRate) / (x - 1);
+
+            // Update display
+            borrowingPower.textContent = `$${Math.round(estimatedBorrowing / 10000) * 10000}`;
+            estimatedRepayment.textContent = `$${monthly.toFixed(0)}`;
+            lvr.textContent = '80%'; // Standard LVR
+        }
+
+        annualIncomeInput.addEventListener('input', () => {
+            annualIncomeValue.textContent = `$${parseInt(annualIncomeInput.value).toLocaleString()}`;
+            calculateBorrowingPower();
+        });
+
+        otherIncomeInput.addEventListener('input', () => {
+            otherIncomeValue.textContent = `$${parseInt(otherIncomeInput.value).toLocaleString()}`;
+            calculateBorrowingPower();
+        });
+
+        expensesInput.addEventListener('input', () => {
+            expensesValue.textContent = `$${parseInt(expensesInput.value).toLocaleString()}`;
+            calculateBorrowingPower();
+        });
+
+        interestRateBorrowingInput.addEventListener('input', () => {
+            interestRateBorrowingValue.textContent = `${parseFloat(interestRateBorrowingInput.value).toFixed(1)}%`;
+            calculateBorrowingPower();
+        });
+
+        loanTermBorrowingInput.addEventListener('input', () => {
+            loanTermBorrowingValue.textContent = `${parseInt(loanTermBorrowingInput.value)} years`;
+            calculateBorrowingPower();
+        });
+
+        // Initialize borrowing power calculator
+        calculateBorrowingPower();
+
+        // Stamp Duty Calculator Logic
+        const propertyValueInput = document.getElementById('property-value');
+        const propertyTypeInput = document.getElementById('property-type');
+        const firstHomeBuyerInput = document.getElementById('first-home-buyer');
+        const stateInput = document.getElementById('state');
+
+        const propertyValueValue = document.getElementById('property-value-value');
+        const stampDutyAmount = document.getElementById('stamp-duty-amount');
+        const concession = document.getElementById('concession');
+        const totalPayable = document.getElementById('total-payable');
+
+        function calculateStampDuty() {
+            const propertyValue = parseFloat(propertyValueInput.value);
+            const propertyType = propertyTypeInput.value;
+            const isFirstHomeBuyer = firstHomeBuyerInput.value === 'yes';
+            const state = stateInput.value;
+
+            // Simplified stamp duty calculation (Victoria rates as default)
+            let duty = 0;
+            let concessionAmount = 0;
+
+            if (state === 'vic') {
+                // Victoria stamp duty rates
+                if (propertyValue <= 130000) {
+                    duty = propertyValue * 0.014;
+                } else if (propertyValue <= 960000) {
+                    duty = 1820 + (propertyValue - 130000) * 0.06;
+                } else {
+                    duty = 50000 + (propertyValue - 960000) * 0.055;
+                }
+
+                // First home buyer concession in Victoria
+                if (isFirstHomeBuyer && propertyType === 'established' && propertyValue <= 600000) {
+                    concessionAmount = duty * 0.5; // 50% concession
+                } else if (isFirstHomeBuyer && propertyType === 'new' && propertyValue <= 750000) {
+                    concessionAmount = duty * 0.5; // 50% concession
+                } else if (isFirstHomeBuyer && propertyType === 'vacant-land' && propertyValue <= 300000) {
+                    concessionAmount = duty * 0.5; // 50% concession
+                }
+            } else if (state === 'nsw') {
+                // NSW stamp duty rates (simplified)
+                if (propertyValue <= 14250) {
+                    duty = 0;
+                } else if (propertyValue <= 54000) {
+                    duty = (propertyValue - 14250) * 0.0125;
+                } else if (propertyValue <= 227000) {
+                    duty = 500 + (propertyValue - 54000) * 0.015;
+                } else if (propertyValue <= 1055000) {
+                    duty = 3095 + (propertyValue - 227000) * 0.04;
+                } else if (propertyValue <= 3000000) {
+                    duty = 36295 + (propertyValue - 1055000) * 0.055;
+                } else {
+                    duty = 143095 + (propertyValue - 3000000) * 0.07;
+                }
+
+                // First home buyer concession in NSW
+                if (isFirstHomeBuyer && propertyValue <= 800000) {
+                    concessionAmount = duty * 0.5; // 50% concession
+                }
+            }
+
+            // Update display
+            stampDutyAmount.textContent = `$${Math.round(duty).toLocaleString()}`;
+            concession.textContent = `$${Math.round(concessionAmount).toLocaleString()}`;
+            totalPayable.textContent = `$${Math.round(duty - concessionAmount).toLocaleString()}`;
+        }
+
+        propertyValueInput.addEventListener('input', () => {
+            propertyValueValue.textContent = `$${parseInt(propertyValueInput.value).toLocaleString()}`;
+            calculateStampDuty();
+        });
+
+        propertyTypeInput.addEventListener('change', calculateStampDuty);
+        firstHomeBuyerInput.addEventListener('change', calculateStampDuty);
+        stateInput.addEventListener('change', calculateStampDuty);
+
+        // Initialize stamp duty calculator
+        calculateStampDuty();
+    </script>
+</body>
+
+</html>

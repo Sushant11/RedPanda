@@ -16,6 +16,19 @@
     <link rel="icon" type="image/x-icon" href="/mainlogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
+
+    <!-- Slick JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -95,6 +108,30 @@
             border-radius: 50%;
             background: #CD1C26;
             cursor: pointer;
+        }
+
+        .slick-track {
+            padding: 20px;
+        }
+
+        .slick-next:before,
+        .slick-prev:before {
+            font-family: slick;
+            font-size: 20px;
+            line-height: 1;
+            opacity: .75;
+            color: #cd1c26;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Hide arrows on screens smaller than md (768px) */
+        @media (max-width: 768px) {
+
+            .slick-prev,
+            .slick-next {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -577,90 +614,139 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Hear from Melbourne homeowners who've worked with us.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Slick Carousel -->
+            <div class="multiple-items">
                 <!-- Testimonial 1 -->
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md mx-8  space-y-4">
                     <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 text-xl mr-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Red Panda Finance made buying our first home in Melbourne so much
-                        easier. They explained everything clearly and found us a great rate that beat the banks.
-                        Couldn't recommend them enough!"</p>
-                    <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
                             <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah K."
                                 class="w-full h-full object-cover">
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800">Sarah K.</h4>
-                            <p class="text-gray-500">First home buyer, Brunswick</p>
+                            <h4 class="font-bold text-gray-800">K G</h4>
+                            <p class="text-gray-500">First home buyers</p>
                         </div>
                     </div>
+                    <!-- Stars -->
+                    <div class="text-yellow-400 text-xl mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"We had a great experience working with Bigyan Gurung at Red Panda
+                        Finance for our home loan. He helped us secure the best possible rate and guided us through
+                        every step of the process."</p>
                 </div>
 
                 <!-- Testimonial 2 -->
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md mx-8  space-y-4">
                     <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 text-xl mr-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"As an investor, I needed someone who understood the Melbourne market.
-                        Red Panda Finance secured me better terms than I could find anywhere else for my property
-                        portfolio."</p>
-                    <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T."
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Kim Ngan Nguyen"
                                 class="w-full h-full object-cover">
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800">Michael T.</h4>
-                            <p class="text-gray-500">Property investor, South Yarra</p>
+                            <h4 class="font-bold text-gray-800">Kim Ngan Nguyen</h4>
+                            <p class="text-gray-500">First home buyer</p>
                         </div>
                     </div>
+                    <!-- Stars -->
+                    <div class="text-yellow-400 text-xl mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Bigyan is very knowledgeable and professional. As a first home buyer,
+                        I didn't have much understanding about all the process, Bigyan was very good at explaining,
+                        which made everything happen smoothly."</p>
                 </div>
 
                 <!-- Testimonial 3 -->
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md mx-8  space-y-4">
                     <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 text-xl mr-1">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"We refinanced with Red Panda and saved $450/month on our mortgage!
-                        Their team was responsive, professional, and made the process incredibly easy. Will definitely
-                        use them again."</p>
-                    <div class="flex items-center">
                         <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jennifer L."
+                            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Anil Moktan Tamang"
                                 class="w-full h-full object-cover">
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800">Jennifer L.</h4>
-                            <p class="text-gray-500">Homeowner, Footscray</p>
+                            <h4 class="font-bold text-gray-800">Anil Moktan Tamang</h4>
+                            <p class="text-gray-500">First home buyer</p>
                         </div>
                     </div>
+                    <!-- Stars -->
+                    <div class="text-yellow-400 text-xl mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Bigyan Gurung dai from Red Panda Finance made our first home buying
+                        experience smooth and stress-free. He helped us secure a great borrowing capacity, even though
+                        my partner isn’t a PR or Australian citizen."</p>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md mx-8  space-y-4">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="Angela Shakya"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Angela Shakya</h4>
+                            <p class="text-gray-500">First home buyer</p>
+                        </div>
+                    </div>
+                    <!-- Stars -->
+                    <div class="text-yellow-400 text-xl mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Bigyan ji was amazing throughout the mortgage process. As first home
+                        buyers, we were quite overwhelmed and unsure about the loan process but Bigyan ji was so patient
+                        throughout."</p>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md mx-8  space-y-4">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Kroshyo Gurung"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Kroshyo Gurung</h4>
+                            <p class="text-gray-500">First home buyer</p>
+                        </div>
+                    </div>
+                    <!-- Stars -->
+                    <div class="text-yellow-400 text-xl mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Bigyan was truly amazing! He made the process of buying our first
+                        home seamless and stress-free. His expertise, patience, and dedication were exceptional."</p>
                 </div>
             </div>
         </div>
     </section>
 
+
+
     <!-- Contact Section -->
-    <section id="contact" class="section py-20 bg-primary text-white">
+    <section id="contact" class="section py-20 bg-slate-800 text-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
@@ -834,6 +920,60 @@
         class="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white opacity-0 invisible transition-all duration-300">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Slick JS -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Initialize Slick with responsive settings based on Tailwind breakpoints
+            $('.multiple-items').slick({
+                infinite: true,
+                slidesToShow: 3,  // Default: 3 slides visible
+                slidesToScroll: 1,  // Default: 1 slide scroll
+                dots: true,  // Adds dots navigation at the bottom
+                autoplay: true,
+                autoplaySpeed: 3000,  // Autoplay interval (2 seconds)
+                accessibility: true,
+                centerMOde: true,
+                pauseOnHover: true,
+                prevArrow: '<button type="button" class="slick-prev">Previous</button>',  // Custom prev arrow
+                nextArrow: '<button type="button" class="slick-next">Next</button>',  // Custom next arrow
+                responsive: [
+
+                    {
+                        breakpoint: 1024,  // Tailwind 'lg' breakpoint
+                        settings: {
+                            slidesToShow: 2,  // Show 3 slides on medium screens
+
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 768,  // Tailwind 'md' breakpoint
+                        settings: {
+                            slidesToShow: 2,  // Show 2 slides on small-medium screens
+
+                        }
+                    },
+                    {
+                        breakpoint: 640,  // Tailwind 'sm' breakpoint
+                        settings: {
+                            slidesToShow: 1,  // Show 1 slide on small screens
+
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+
+
 
     <script>
         // Mobile menu toggle

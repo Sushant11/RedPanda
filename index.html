@@ -29,6 +29,10 @@
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
+
+
     <script>
         tailwind.config = {
             theme: {
@@ -133,6 +137,13 @@
                 display: none !important;
             }
         }
+
+        select option:hover {
+            background-color: #CD1C26 !important;
+            /* Red background on hover */
+            color: white;
+            /* White text color on hover */
+        }
     </style>
 </head>
 
@@ -150,7 +161,7 @@
             <div class="hidden md:flex space-x-8">
                 <a href="#home" class="nav-link text-gray-700 hover:text-primary transition">Home</a>
                 <a href="#services" class="nav-link text-gray-700 hover:text-primary transition">Services</a>
-                <a href="#calculators" class="nav-link text-gray-700 hover:text-primary transition">Calculators</a>
+                <!-- <a href="#calculators" class="nav-link text-gray-700 hover:text-primary transition">Calculators</a> -->
                 <a href="#about" class="nav-link text-gray-700 hover:text-primary transition">About</a>
                 <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary transition">Testimonials</a>
                 <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition">Contact</a>
@@ -167,7 +178,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
             <a href="#home" class="block py-2 text-gray-700 hover:text-primary transition">Home</a>
             <a href="#services" class="block py-2 text-gray-700 hover:text-primary transition">Services</a>
-            <a href="#calculators" class="block py-2 text-gray-700 hover:text-primary transition">Calculators</a>
+            <!-- <a href="#calculators" class="block py-2 text-gray-700 hover:text-primary transition">Calculators</a> -->
             <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition">About</a>
             <a href="#testimonials" class="block py-2 text-gray-700 hover:text-primary transition">Testimonials</a>
             <a href="#contact" class="block py-2 text-gray-700 hover:text-primary transition">Contact</a>
@@ -275,284 +286,301 @@
     </section>
 
     <!-- Calculators Section -->
-    <section id="calculators" class="section py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Mortgage Calculators</h2>
-                <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Use our calculators to estimate your mortgage payments,
-                    borrowing power, and costs.</p>
-            </div>
-
-            <!-- Calculator Tabs -->
-            <div class="flex justify-center mb-8">
-                <div class="inline-flex rounded-md shadow-sm">
-                    <button id="repayment-tab"
-                        class="calculator-tab active px-6 py-3 text-sm font-medium rounded-l-lg border border-gray-300">
-                        Loan Repayment
-                    </button>
-                    <button id="borrowing-tab"
-                        class="calculator-tab px-6 py-3 text-sm font-medium border-t border-b border-gray-300">
-                        Borrowing Power
-                    </button>
-                    <button id="stamp-duty-tab"
-                        class="calculator-tab px-6 py-3 text-sm font-medium rounded-r-lg border border-gray-300">
-                        Stamp Duty
-                    </button>
+    <template id="calculators-disabled">
+        <section id="calculators" class="section py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Mortgage Calculators</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Use our calculators to estimate your mortgage payments,
+                        borrowing power, and costs.</p>
                 </div>
-            </div>
 
-            <!-- Calculator Content -->
-            <div class="bg-gray-50 rounded-xl shadow-md p-8">
-                <!-- Repayment Calculator -->
-                <div id="repayment-calculator" class="calculator-content">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <div class="mb-6">
-                                <label for="loan-amount" class="block text-gray-700 font-medium mb-2">Loan Amount
-                                    ($)</label>
-                                <input type="range" id="loan-amount" min="100000" max="2000000" step="10000"
-                                    value="500000" class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>$100,000</span>
-                                    <span id="loan-amount-value" class="font-bold">$500,000</span>
-                                    <span>$2,000,000</span>
+                <!-- Calculator Tabs -->
+                <div class="flex justify-center mb-8">
+                    <div class="inline-flex rounded-md shadow-sm">
+                        <button id="repayment-tab"
+                            class="calculator-tab active px-6 py-3 text-sm font-medium rounded-l-lg border border-gray-300">
+                            Loan Repayment
+                        </button>
+                        <button id="borrowing-tab"
+                            class="calculator-tab px-6 py-3 text-sm font-medium border-t border-b border-gray-300">
+                            Borrowing Power
+                        </button>
+                        <button id="stamp-duty-tab"
+                            class="calculator-tab px-6 py-3 text-sm font-medium rounded-r-lg border border-gray-300">
+                            Stamp Duty
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Calculator Content -->
+                <div class="bg-gray-50 rounded-xl shadow-md p-8">
+                    <!-- Repayment Calculator -->
+                    <div id="repayment-calculator" class="calculator-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <div class="mb-6">
+                                    <label for="loan-amount" class="block text-gray-700 font-medium mb-2">Loan Amount
+                                        ($)</label>
+                                    <input type="range" id="loan-amount" min="100000" max="2000000" step="10000"
+                                        value="500000" class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>$100,000</span>
+                                        <span id="loan-amount-value" class="font-bold">$500,000</span>
+                                        <span>$2,000,000</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="interest-rate" class="block text-gray-700 font-medium mb-2">Interest
+                                        Rate
+                                        (%)</label>
+                                    <input type="range" id="interest-rate" min="1" max="10" step="0.1" value="5.5"
+                                        class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>1%</span>
+                                        <span id="interest-rate-value" class="font-bold">5.5%</span>
+                                        <span>10%</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="loan-term" class="block text-gray-700 font-medium mb-2">Loan Term
+                                        (years)</label>
+                                    <input type="range" id="loan-term" min="5" max="30" step="1" value="25"
+                                        class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>5 years</span>
+                                        <span id="loan-term-value" class="font-bold">25 years</span>
+                                        <span>30 years</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="mb-6">
-                                <label for="interest-rate" class="block text-gray-700 font-medium mb-2">Interest Rate
-                                    (%)</label>
-                                <input type="range" id="interest-rate" min="1" max="10" step="0.1" value="5.5"
-                                    class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>1%</span>
-                                    <span id="interest-rate-value" class="font-bold">5.5%</span>
-                                    <span>10%</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="loan-term" class="block text-gray-700 font-medium mb-2">Loan Term
-                                    (years)</label>
-                                <input type="range" id="loan-term" min="5" max="30" step="1" value="25"
-                                    class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>5 years</span>
-                                    <span id="loan-term-value" class="font-bold">25 years</span>
-                                    <span>30 years</span>
+                            <div class="bg-white rounded-lg p-6 shadow-sm">
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">Repayment Summary</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Monthly Payment</span>
+                                        <span id="monthly-payment"
+                                            class="font-bold text-primary text-lg">$3,078.59</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Total Interest</span>
+                                        <span id="total-interest" class="font-bold text-gray-800">$423,577.84</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Total Repayment</span>
+                                        <span id="total-repayment" class="font-bold text-gray-800">$923,577.84</span>
+                                    </div>
+                                    <div class="pt-4">
+                                        <p class="text-sm text-gray-500">Calculations are estimates only. Actual
+                                            repayments
+                                            may vary based on lender policies and fees.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="bg-white rounded-lg p-6 shadow-sm">
-                            <h3 class="text-xl font-bold text-gray-800 mb-4">Repayment Summary</h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Monthly Payment</span>
-                                    <span id="monthly-payment" class="font-bold text-primary text-lg">$3,078.59</span>
+                    <!-- Borrowing Power Calculator -->
+                    <div id="borrowing-calculator" class="calculator-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <div class="mb-6">
+                                    <label for="annual-income" class="block text-gray-700 font-medium mb-2">Annual
+                                        Income
+                                        ($)</label>
+                                    <input type="range" id="annual-income" min="50000" max="300000" step="5000"
+                                        value="100000" class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>$50,000</span>
+                                        <span id="annual-income-value" class="font-bold">$100,000</span>
+                                        <span>$300,000</span>
+                                    </div>
                                 </div>
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Total Interest</span>
-                                    <span id="total-interest" class="font-bold text-gray-800">$423,577.84</span>
+
+                                <div class="mb-6">
+                                    <label for="other-income" class="block text-gray-700 font-medium mb-2">Other Income
+                                        ($)</label>
+                                    <input type="range" id="other-income" min="0" max="100000" step="1000" value="0"
+                                        class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>$0</span>
+                                        <span id="other-income-value" class="font-bold">$0</span>
+                                        <span>$100,000</span>
+                                    </div>
                                 </div>
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Total Repayment</span>
-                                    <span id="total-repayment" class="font-bold text-gray-800">$923,577.84</span>
+
+                                <div class="mb-6">
+                                    <label for="expenses" class="block text-gray-700 font-medium mb-2">Monthly Expenses
+                                        ($)</label>
+                                    <input type="range" id="expenses" min="1000" max="10000" step="100" value="3000"
+                                        class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>$1,000</span>
+                                        <span id="expenses-value" class="font-bold">$3,000</span>
+                                        <span>$10,000</span>
+                                    </div>
                                 </div>
-                                <div class="pt-4">
-                                    <p class="text-sm text-gray-500">Calculations are estimates only. Actual repayments
-                                        may vary based on lender policies and fees.</p>
+
+                                <div class="mb-6">
+                                    <label for="interest-rate-borrowing"
+                                        class="block text-gray-700 font-medium mb-2">Interest Rate (%)</label>
+                                    <input type="range" id="interest-rate-borrowing" min="1" max="10" step="0.1"
+                                        value="5.5" class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>1%</span>
+                                        <span id="interest-rate-borrowing-value" class="font-bold">5.5%</span>
+                                        <span>10%</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="loan-term-borrowing" class="block text-gray-700 font-medium mb-2">Loan
+                                        Term
+                                        (years)</label>
+                                    <input type="range" id="loan-term-borrowing" min="5" max="30" step="1" value="25"
+                                        class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>5 years</span>
+                                        <span id="loan-term-borrowing-value" class="font-bold">25 years</span>
+                                        <span>30 years</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-6 shadow-sm">
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">Borrowing Summary</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Estimated Borrowing Power</span>
+                                        <span id="borrowing-power"
+                                            class="font-bold text-primary text-lg">$650,000</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Estimated Monthly Repayment</span>
+                                        <span id="estimated-repayment" class="font-bold text-gray-800">$4,000</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Loan to Value Ratio (LVR)</span>
+                                        <span id="lvr" class="font-bold text-gray-800">80%</span>
+                                    </div>
+                                    <div class="pt-4">
+                                        <p class="text-sm text-gray-500">This is an estimate only. Your actual borrowing
+                                            capacity may vary based on lender policies, credit history, and other
+                                            factors.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stamp Duty Calculator -->
+                    <div id="stamp-duty-calculator" class="calculator-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <div class="mb-6">
+                                    <label for="property-value" class="block text-gray-700 font-medium mb-2">Property
+                                        Value
+                                        ($)</label>
+                                    <input type="range" id="property-value" min="100000" max="3000000" step="10000"
+                                        value="750000" class="w-full mb-2">
+                                    <div class="flex justify-between">
+                                        <span>$100,000</span>
+                                        <span id="property-value-value" class="font-bold">$750,000</span>
+                                        <span>$3,000,000</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="property-type" class="block text-gray-700 font-medium mb-2">Property
+                                        Type</label>
+                                    <select id="property-type"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="established">Established Home</option>
+                                        <option value="new">New Home</option>
+                                        <option value="vacant-land">Vacant Land</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="first-home-buyer" class="block text-gray-700 font-medium mb-2">First
+                                        Home
+                                        Buyer?</label>
+                                    <select id="first-home-buyer"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="state" class="block text-gray-700 font-medium mb-2">State</label>
+                                    <select id="state"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="vic" selected>Victoria</option>
+                                        <option value="nsw">New South Wales</option>
+                                        <option value="qld">Queensland</option>
+                                        <option value="wa">Western Australia</option>
+                                        <option value="sa">South Australia</option>
+                                        <option value="tas">Tasmania</option>
+                                        <option value="act">ACT</option>
+                                        <option value="nt">Northern Territory</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-6 shadow-sm">
+                                <h3 class="text-xl font-bold text-gray-800 mb-4">Stamp Duty Summary</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Stamp Duty</span>
+                                        <span id="stamp-duty-amount"
+                                            class="font-bold text-primary text-lg">$40,070</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">First Home Buyer Concession</span>
+                                        <span id="concession" class="font-bold text-gray-800">$0</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-2">
+                                        <span class="text-gray-600">Total Payable</span>
+                                        <span id="total-payable" class="font-bold text-gray-800">$40,070</span>
+                                    </div>
+                                    <div class="pt-4">
+                                        <p class="text-sm text-gray-500">Calculations are estimates based on current
+                                            rates.
+                                            Additional fees may apply. First home buyer concessions vary by state.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Borrowing Power Calculator -->
-                <div id="borrowing-calculator" class="calculator-content hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <div class="mb-6">
-                                <label for="annual-income" class="block text-gray-700 font-medium mb-2">Annual Income
-                                    ($)</label>
-                                <input type="range" id="annual-income" min="50000" max="300000" step="5000"
-                                    value="100000" class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>$50,000</span>
-                                    <span id="annual-income-value" class="font-bold">$100,000</span>
-                                    <span>$300,000</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="other-income" class="block text-gray-700 font-medium mb-2">Other Income
-                                    ($)</label>
-                                <input type="range" id="other-income" min="0" max="100000" step="1000" value="0"
-                                    class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>$0</span>
-                                    <span id="other-income-value" class="font-bold">$0</span>
-                                    <span>$100,000</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="expenses" class="block text-gray-700 font-medium mb-2">Monthly Expenses
-                                    ($)</label>
-                                <input type="range" id="expenses" min="1000" max="10000" step="100" value="3000"
-                                    class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>$1,000</span>
-                                    <span id="expenses-value" class="font-bold">$3,000</span>
-                                    <span>$10,000</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="interest-rate-borrowing"
-                                    class="block text-gray-700 font-medium mb-2">Interest Rate (%)</label>
-                                <input type="range" id="interest-rate-borrowing" min="1" max="10" step="0.1" value="5.5"
-                                    class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>1%</span>
-                                    <span id="interest-rate-borrowing-value" class="font-bold">5.5%</span>
-                                    <span>10%</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="loan-term-borrowing" class="block text-gray-700 font-medium mb-2">Loan Term
-                                    (years)</label>
-                                <input type="range" id="loan-term-borrowing" min="5" max="30" step="1" value="25"
-                                    class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>5 years</span>
-                                    <span id="loan-term-borrowing-value" class="font-bold">25 years</span>
-                                    <span>30 years</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-lg p-6 shadow-sm">
-                            <h3 class="text-xl font-bold text-gray-800 mb-4">Borrowing Summary</h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Estimated Borrowing Power</span>
-                                    <span id="borrowing-power" class="font-bold text-primary text-lg">$650,000</span>
-                                </div>
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Estimated Monthly Repayment</span>
-                                    <span id="estimated-repayment" class="font-bold text-gray-800">$4,000</span>
-                                </div>
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Loan to Value Ratio (LVR)</span>
-                                    <span id="lvr" class="font-bold text-gray-800">80%</span>
-                                </div>
-                                <div class="pt-4">
-                                    <p class="text-sm text-gray-500">This is an estimate only. Your actual borrowing
-                                        capacity may vary based on lender policies, credit history, and other factors.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stamp Duty Calculator -->
-                <div id="stamp-duty-calculator" class="calculator-content hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <div class="mb-6">
-                                <label for="property-value" class="block text-gray-700 font-medium mb-2">Property Value
-                                    ($)</label>
-                                <input type="range" id="property-value" min="100000" max="3000000" step="10000"
-                                    value="750000" class="w-full mb-2">
-                                <div class="flex justify-between">
-                                    <span>$100,000</span>
-                                    <span id="property-value-value" class="font-bold">$750,000</span>
-                                    <span>$3,000,000</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="property-type" class="block text-gray-700 font-medium mb-2">Property
-                                    Type</label>
-                                <select id="property-type"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                    <option value="established">Established Home</option>
-                                    <option value="new">New Home</option>
-                                    <option value="vacant-land">Vacant Land</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="first-home-buyer" class="block text-gray-700 font-medium mb-2">First Home
-                                    Buyer?</label>
-                                <select id="first-home-buyer"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                    <option value="no">No</option>
-                                    <option value="yes">Yes</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="state" class="block text-gray-700 font-medium mb-2">State</label>
-                                <select id="state"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                                    <option value="vic" selected>Victoria</option>
-                                    <option value="nsw">New South Wales</option>
-                                    <option value="qld">Queensland</option>
-                                    <option value="wa">Western Australia</option>
-                                    <option value="sa">South Australia</option>
-                                    <option value="tas">Tasmania</option>
-                                    <option value="act">ACT</option>
-                                    <option value="nt">Northern Territory</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-lg p-6 shadow-sm">
-                            <h3 class="text-xl font-bold text-gray-800 mb-4">Stamp Duty Summary</h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Stamp Duty</span>
-                                    <span id="stamp-duty-amount" class="font-bold text-primary text-lg">$40,070</span>
-                                </div>
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">First Home Buyer Concession</span>
-                                    <span id="concession" class="font-bold text-gray-800">$0</span>
-                                </div>
-                                <div class="flex justify-between border-b pb-2">
-                                    <span class="text-gray-600">Total Payable</span>
-                                    <span id="total-payable" class="font-bold text-gray-800">$40,070</span>
-                                </div>
-                                <div class="pt-4">
-                                    <p class="text-sm text-gray-500">Calculations are estimates based on current rates.
-                                        Additional fees may apply. First home buyer concessions vary by state.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </template>
 
     <!-- About Section -->
     <section id="about" class="section py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                        alt="Red Panda Finance team" class="rounded-lg shadow-xl w-full">
+                    <img src="/Better Choice-12.JPG" alt="Red Panda Finance team"
+                        class="rounded-lg shadow-xl w-full h-[50vh] md:h-[75vh] object-cover object-[center_30%]">
                 </div>
                 <div class="lg:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Red Panda Finance</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Meet your personal broker</h2>
                     <div class="w-20 h-1 bg-primary mb-6"></div>
-                    <p class="text-gray-600 mb-6">Based in Melbourne, Victoria, Red Panda Finance is your trusted local
-                        mortgage broker. We specialize in helping home buyers and investors navigate the complex
-                        Australian property market with smart, tailored financial solutions.</p>
+                    <p class="text-gray-600 mb-6"> Hi, I’m Bigyan, yor personal broker here at Red Panda Finance — based
+                        right
+                        here in Melbourne. Whether you're buying your first home, upgrading, or investing, I’m here to
+                        make the process simple and stress-free. With access to over 50 lenders and a deep understanding
+                        of the Aussie property market, I'll help you find the right loan, tailored to your goals. Let’s
+                        chat about what works best for you.
+                    </p>
 
                     <div class="mb-8">
                         <div class="flex items-start mb-4">
@@ -756,7 +784,7 @@
             </div>
 
             <div class="flex flex-col lg:flex-row gap-12">
-                <div class="lg:w-1/2">
+                <!-- <div class="lg:w-1/2">
                     <form class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-8">
                         <div class="mb-6">
                             <label for="name" class="block mb-2 font-medium">Full Name</label>
@@ -786,7 +814,105 @@
                             class="w-full bg-white text-primary hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition duration-300">Submit
                             Request</button>
                     </form>
+                </div> -->
+
+                <div class="lg:w-1/2 w-full">
+                    <form
+                        class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+
+                        <!-- Full Name -->
+                        <div>
+                            <label for="name" class="block text-white mb-2 font-medium">Full Name</label>
+                            <input type="text" id="name" placeholder="John Smith"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" />
+                        </div>
+
+                        <!-- Email Address -->
+                        <div>
+                            <label for="email" class="block text-white mb-2 font-medium">Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" />
+                        </div>
+
+                        <!-- Mobile Number -->
+                        <div>
+                            <label for="phone" class="block text-white mb-2 font-medium">Mobile Number</label>
+                            <input type="tel" id="phone" placeholder="(555) 123-4567"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" />
+                        </div>
+
+                        <!-- Loan Type / Purpose -->
+                        <div>
+                            <label for="loan-type" class="block text-white mb-2 font-medium">Loan Type / Purpose</label>
+                            <select id="loan-type"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
+                                <option value="first-home">First Home</option>
+                                <option value="refinance">Refinance</option>
+                                <option value="investment">Investment</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+
+                        <!-- Property Value / Loan Amount -->
+                        <div>
+                            <label for="loan-amount" class="block text-white mb-2 font-medium">Property Value or Loan
+                                Amount</label>
+                            <input type="number" id="loan-amount" min="100000" max="5000000" step="10000" value="500000"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" />
+                        </div>
+
+                        <!-- State / Location -->
+                        <div>
+                            <label for="state" class="block text-white mb-2 font-medium">State / Location</label>
+                            <select id="state"
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
+                                <option value="vic" selected>Victoria</option>
+                                <option value="nsw">New South Wales</option>
+                                <option value="qld">Queensland</option>
+                                <option value="wa">Western Australia</option>
+                                <option value="sa">South Australia</option>
+                                <option value="tas">Tasmania</option>
+                                <option value="act">ACT</option>
+                                <option value="nt">Northern Territory</option>
+                            </select>
+                        </div>
+
+                        <!-- First Home Buyer -->
+                        <div class="col-span-1 md:col-span-2">
+                            <label for="firstHome" class="block text-white mb-2 font-medium">First Home Buyer</label>
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-2 sm:space-y-0">
+                                <div class="flex items-center">
+                                    <input type="radio" id="first-home-yes" name="first-home" value="yes"
+                                        class="h-4 w-4 text-red-500 focus:ring-2 focus:ring-white" />
+                                    <label for="first-home-yes" class="ml-2 text-white">Yes</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="first-home-no" name="first-home" value="no" checked
+                                        class="h-4 w-4 text-red-500 focus:ring-2 focus:ring-white" />
+                                    <label for="first-home-no" class="ml-2 text-white">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comments -->
+                        <div class="col-span-1 md:col-span-2">
+                            <label for="message" class="block text-white mb-2 font-medium">Comments or Notes</label>
+                            <textarea id="message" rows="4" placeholder="Tell us about your mortgage needs..."
+                                class="w-full px-4 py-3 bg-white bg-opacity-20 text-white border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70"></textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-span-1 md:col-span-2">
+                            <button type="submit"
+                                class="w-full bg-white text-primary hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition duration-300">
+                                <i class="fas fa-paper-plane mr-2"></i> Submit Request
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
+
+
 
                 <div class="lg:w-1/2">
                     <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-8 h-full">
@@ -819,7 +945,7 @@
                                 </div>
                                 <div class="ml-4">
                                     <h4 class="font-bold text-lg mb-1">Email Us</h4>
-                                    <p class="opacity-90">inquiry@redpandafinance.com<br>Response within 24 hours</p>
+                                    <p class="opacity-90">hello@redpandafinance.com<br>Response within 24 hours</p>
                                 </div>
                             </div>
                         </div>
@@ -865,8 +991,8 @@
                         <ul class="space-y-2">
                             <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
                             <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
-                            <li><a href="#calculators" class="text-gray-400 hover:text-white transition">Calculators</a>
-                            </li>
+                            <!-- <li><a href="#calculators" class="text-gray-400 hover:text-white transition">Calculators</a>
+                            </li> -->
                             <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
                             <li><a href="#testimonials"
                                     class="text-gray-400 hover:text-white transition">Testimonials</a></li>
@@ -927,6 +1053,7 @@
     <!-- Slick JS -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -1021,12 +1148,23 @@
             }
         });
 
+        gsap.registerPlugin(ScrollToPlugin);
+
+        // Assuming backToTopButton is already selected as the button to scroll to top
         backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            // Registering the ScrollToPlugin if necessary
+
+            gsap.to(window, {
+                scrollTo: {
+                    y: 0,  // Scroll to the top of the page
+                    autoKill: true  // Auto kill any ongoing scroll
+                },
+                duration: 1,  // Duration of the scroll animation (1 second)
+                ease: "power2.out"  // Smooth easing for the scroll animation
             });
         });
+
+
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1037,242 +1175,249 @@
                 const targetElement = document.querySelector(targetId);
 
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                    // Use GSAP's scrollTo method for smooth scrolling
+                    gsap.to(window, {
+                        scrollTo: {
+                            y: targetElement.offsetTop - 70, // Offset to ensure there's space at the top
+                            autoKill: true
+                        },
+                        duration: 1, // Duration of the smooth scroll
+                        ease: "power2.out" // Easing function for a smooth scroll effect
                     });
 
-                    // Close mobile menu if open
-                    mobileMenu.classList.add('hidden');
+                    // Close mobile menu if open (optional)
+                    const mobileMenu = document.querySelector('#mobileMenu');
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
                 }
             });
         });
-
         // Calculator Tab Switching
-        const calculatorTabs = {
-            'repayment-tab': 'repayment-calculator',
-            'borrowing-tab': 'borrowing-calculator',
-            'stamp-duty-tab': 'stamp-duty-calculator'
-        };
-
-        Object.entries(calculatorTabs).forEach(([tabId, contentId]) => {
-            const tab = document.getElementById(tabId);
-            const content = document.getElementById(contentId);
-
-            tab.addEventListener('click', () => {
-                // Hide all calculator contents
-                document.querySelectorAll('.calculator-content').forEach(el => {
-                    el.classList.add('hidden');
-                });
-
-                // Remove active class from all tabs
-                document.querySelectorAll('.calculator-tab').forEach(el => {
-                    el.classList.remove('active');
-                });
-
-                // Show selected content and mark tab as active
-                content.classList.remove('hidden');
-                tab.classList.add('active');
-            });
-        });
-
-        // Repayment Calculator Logic
-        const loanAmountInput = document.getElementById('loan-amount');
-        const interestRateInput = document.getElementById('interest-rate');
-        const loanTermInput = document.getElementById('loan-term');
-
-        const loanAmountValue = document.getElementById('loan-amount-value');
-        const interestRateValue = document.getElementById('interest-rate-value');
-        const loanTermValue = document.getElementById('loan-term-value');
-
-        const monthlyPayment = document.getElementById('monthly-payment');
-        const totalInterest = document.getElementById('total-interest');
-        const totalRepayment = document.getElementById('total-repayment');
-
-        function calculateRepayment() {
-            const loanAmount = parseFloat(loanAmountInput.value);
-            const interestRate = parseFloat(interestRateInput.value) / 100 / 12;
-            const loanTerm = parseFloat(loanTermInput.value) * 12;
-
-            // Calculate monthly payment
-            const x = Math.pow(1 + interestRate, loanTerm);
-            const monthly = (loanAmount * x * interestRate) / (x - 1);
-
-            // Calculate totals
-            const total = monthly * loanTerm;
-            const totalInt = total - loanAmount;
-
-            // Update display
-            monthlyPayment.textContent = `$${monthly.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-            totalInterest.textContent = `$${totalInt.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-            totalRepayment.textContent = `$${total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-        }
-
-        loanAmountInput.addEventListener('input', () => {
-            loanAmountValue.textContent = `$${parseInt(loanAmountInput.value).toLocaleString()}`;
-            calculateRepayment();
-        });
-
-        interestRateInput.addEventListener('input', () => {
-            interestRateValue.textContent = `${parseFloat(interestRateInput.value).toFixed(1)}%`;
-            calculateRepayment();
-        });
-
-        loanTermInput.addEventListener('input', () => {
-            loanTermValue.textContent = `${parseInt(loanTermInput.value)} years`;
-            calculateRepayment();
-        });
-
-        // Initialize repayment calculator
-        calculateRepayment();
-
-        // Borrowing Power Calculator Logic
-        const annualIncomeInput = document.getElementById('annual-income');
-        const otherIncomeInput = document.getElementById('other-income');
-        const expensesInput = document.getElementById('expenses');
-        const interestRateBorrowingInput = document.getElementById('interest-rate-borrowing');
-        const loanTermBorrowingInput = document.getElementById('loan-term-borrowing');
-
-        const annualIncomeValue = document.getElementById('annual-income-value');
-        const otherIncomeValue = document.getElementById('other-income-value');
-        const expensesValue = document.getElementById('expenses-value');
-        const interestRateBorrowingValue = document.getElementById('interest-rate-borrowing-value');
-        const loanTermBorrowingValue = document.getElementById('loan-term-borrowing-value');
-
-        const borrowingPower = document.getElementById('borrowing-power');
-        const estimatedRepayment = document.getElementById('estimated-repayment');
-        const lvr = document.getElementById('lvr');
-
-        function calculateBorrowingPower() {
-            const annualIncome = parseFloat(annualIncomeInput.value);
-            const otherIncome = parseFloat(otherIncomeInput.value);
-            const expenses = parseFloat(expensesInput.value);
-            const interestRate = parseFloat(interestRateBorrowingInput.value) / 100 / 12;
-            const loanTerm = parseFloat(loanTermBorrowingInput.value) * 12;
-
-            // Simple calculation (in reality this would be more complex)
-            const totalIncome = annualIncome + otherIncome;
-            const disposableIncome = (totalIncome / 12) - expenses;
-
-            // Estimate borrowing power (using a simplified 30% rule)
-            const estimatedBorrowing = (disposableIncome * 0.3) * (loanTerm / interestRate);
-
-            // Calculate estimated monthly repayment for this amount
-            const x = Math.pow(1 + interestRate, loanTerm);
-            const monthly = (estimatedBorrowing * x * interestRate) / (x - 1);
-
-            // Update display
-            borrowingPower.textContent = `$${Math.round(estimatedBorrowing / 10000) * 10000}`;
-            estimatedRepayment.textContent = `$${monthly.toFixed(0)}`;
-            lvr.textContent = '80%'; // Standard LVR
-        }
-
-        annualIncomeInput.addEventListener('input', () => {
-            annualIncomeValue.textContent = `$${parseInt(annualIncomeInput.value).toLocaleString()}`;
-            calculateBorrowingPower();
-        });
-
-        otherIncomeInput.addEventListener('input', () => {
-            otherIncomeValue.textContent = `$${parseInt(otherIncomeInput.value).toLocaleString()}`;
-            calculateBorrowingPower();
-        });
-
-        expensesInput.addEventListener('input', () => {
-            expensesValue.textContent = `$${parseInt(expensesInput.value).toLocaleString()}`;
-            calculateBorrowingPower();
-        });
-
-        interestRateBorrowingInput.addEventListener('input', () => {
-            interestRateBorrowingValue.textContent = `${parseFloat(interestRateBorrowingInput.value).toFixed(1)}%`;
-            calculateBorrowingPower();
-        });
-
-        loanTermBorrowingInput.addEventListener('input', () => {
-            loanTermBorrowingValue.textContent = `${parseInt(loanTermBorrowingInput.value)} years`;
-            calculateBorrowingPower();
-        });
-
-        // Initialize borrowing power calculator
-        calculateBorrowingPower();
-
-        // Stamp Duty Calculator Logic
-        const propertyValueInput = document.getElementById('property-value');
-        const propertyTypeInput = document.getElementById('property-type');
-        const firstHomeBuyerInput = document.getElementById('first-home-buyer');
-        const stateInput = document.getElementById('state');
-
-        const propertyValueValue = document.getElementById('property-value-value');
-        const stampDutyAmount = document.getElementById('stamp-duty-amount');
-        const concession = document.getElementById('concession');
-        const totalPayable = document.getElementById('total-payable');
-
-        function calculateStampDuty() {
-            const propertyValue = parseFloat(propertyValueInput.value);
-            const propertyType = propertyTypeInput.value;
-            const isFirstHomeBuyer = firstHomeBuyerInput.value === 'yes';
-            const state = stateInput.value;
-
-            // Simplified stamp duty calculation (Victoria rates as default)
-            let duty = 0;
-            let concessionAmount = 0;
-
-            if (state === 'vic') {
-                // Victoria stamp duty rates
-                if (propertyValue <= 130000) {
-                    duty = propertyValue * 0.014;
-                } else if (propertyValue <= 960000) {
-                    duty = 1820 + (propertyValue - 130000) * 0.06;
-                } else {
-                    duty = 50000 + (propertyValue - 960000) * 0.055;
-                }
-
-                // First home buyer concession in Victoria
-                if (isFirstHomeBuyer && propertyType === 'established' && propertyValue <= 600000) {
-                    concessionAmount = duty * 0.5; // 50% concession
-                } else if (isFirstHomeBuyer && propertyType === 'new' && propertyValue <= 750000) {
-                    concessionAmount = duty * 0.5; // 50% concession
-                } else if (isFirstHomeBuyer && propertyType === 'vacant-land' && propertyValue <= 300000) {
-                    concessionAmount = duty * 0.5; // 50% concession
-                }
-            } else if (state === 'nsw') {
-                // NSW stamp duty rates (simplified)
-                if (propertyValue <= 14250) {
-                    duty = 0;
-                } else if (propertyValue <= 54000) {
-                    duty = (propertyValue - 14250) * 0.0125;
-                } else if (propertyValue <= 227000) {
-                    duty = 500 + (propertyValue - 54000) * 0.015;
-                } else if (propertyValue <= 1055000) {
-                    duty = 3095 + (propertyValue - 227000) * 0.04;
-                } else if (propertyValue <= 3000000) {
-                    duty = 36295 + (propertyValue - 1055000) * 0.055;
-                } else {
-                    duty = 143095 + (propertyValue - 3000000) * 0.07;
-                }
-
-                // First home buyer concession in NSW
-                if (isFirstHomeBuyer && propertyValue <= 800000) {
-                    concessionAmount = duty * 0.5; // 50% concession
-                }
-            }
-
-            // Update display
-            stampDutyAmount.textContent = `$${Math.round(duty).toLocaleString()}`;
-            concession.textContent = `$${Math.round(concessionAmount).toLocaleString()}`;
-            totalPayable.textContent = `$${Math.round(duty - concessionAmount).toLocaleString()}`;
-        }
-
-        propertyValueInput.addEventListener('input', () => {
-            propertyValueValue.textContent = `$${parseInt(propertyValueInput.value).toLocaleString()}`;
-            calculateStampDuty();
-        });
-
-        propertyTypeInput.addEventListener('change', calculateStampDuty);
-        firstHomeBuyerInput.addEventListener('change', calculateStampDuty);
-        stateInput.addEventListener('change', calculateStampDuty);
-
-        // Initialize stamp duty calculator
-        calculateStampDuty();
+        /* const calculatorTabs = {
+             'repayment-tab': 'repayment-calculator',
+             'borrowing-tab': 'borrowing-calculator',
+             'stamp-duty-tab': 'stamp-duty-calculator'
+         };
+ 
+         Object.entries(calculatorTabs).forEach(([tabId, contentId]) => {
+             const tab = document.getElementById(tabId);
+             const content = document.getElementById(contentId);
+ 
+             tab.addEventListener('click', () => {
+                 // Hide all calculator contents
+                 document.querySelectorAll('.calculator-content').forEach(el => {
+                     el.classList.add('hidden');
+                 });
+ 
+                 // Remove active class from all tabs
+                 document.querySelectorAll('.calculator-tab').forEach(el => {
+                     el.classList.remove('active');
+                 });
+ 
+                 // Show selected content and mark tab as active
+                 content.classList.remove('hidden');
+                 tab.classList.add('active');
+             });
+         });
+ 
+         // Repayment Calculator Logic
+         const loanAmountInput = document.getElementById('loan-amount');
+         const interestRateInput = document.getElementById('interest-rate');
+         const loanTermInput = document.getElementById('loan-term');
+ 
+         const loanAmountValue = document.getElementById('loan-amount-value');
+         const interestRateValue = document.getElementById('interest-rate-value');
+         const loanTermValue = document.getElementById('loan-term-value');
+ 
+         const monthlyPayment = document.getElementById('monthly-payment');
+         const totalInterest = document.getElementById('total-interest');
+         const totalRepayment = document.getElementById('total-repayment');
+ 
+         function calculateRepayment() {
+             const loanAmount = parseFloat(loanAmountInput.value);
+             const interestRate = parseFloat(interestRateInput.value) / 100 / 12;
+             const loanTerm = parseFloat(loanTermInput.value) * 12;
+ 
+             // Calculate monthly payment
+             const x = Math.pow(1 + interestRate, loanTerm);
+             const monthly = (loanAmount * x * interestRate) / (x - 1);
+ 
+             // Calculate totals
+             const total = monthly * loanTerm;
+             const totalInt = total - loanAmount;
+ 
+             // Update display
+             monthlyPayment.textContent = `$${monthly.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+             totalInterest.textContent = `$${totalInt.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+             totalRepayment.textContent = `$${total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+         }
+ 
+         loanAmountInput.addEventListener('input', () => {
+             loanAmountValue.textContent = `$${parseInt(loanAmountInput.value).toLocaleString()}`;
+             calculateRepayment();
+         });
+ 
+         interestRateInput.addEventListener('input', () => {
+             interestRateValue.textContent = `${parseFloat(interestRateInput.value).toFixed(1)}%`;
+             calculateRepayment();
+         });
+ 
+         loanTermInput.addEventListener('input', () => {
+             loanTermValue.textContent = `${parseInt(loanTermInput.value)} years`;
+             calculateRepayment();
+         });
+ 
+         // Initialize repayment calculator
+         calculateRepayment();
+ 
+         // Borrowing Power Calculator Logic
+         const annualIncomeInput = document.getElementById('annual-income');
+         const otherIncomeInput = document.getElementById('other-income');
+         const expensesInput = document.getElementById('expenses');
+         const interestRateBorrowingInput = document.getElementById('interest-rate-borrowing');
+         const loanTermBorrowingInput = document.getElementById('loan-term-borrowing');
+ 
+         const annualIncomeValue = document.getElementById('annual-income-value');
+         const otherIncomeValue = document.getElementById('other-income-value');
+         const expensesValue = document.getElementById('expenses-value');
+         const interestRateBorrowingValue = document.getElementById('interest-rate-borrowing-value');
+         const loanTermBorrowingValue = document.getElementById('loan-term-borrowing-value');
+ 
+         const borrowingPower = document.getElementById('borrowing-power');
+         const estimatedRepayment = document.getElementById('estimated-repayment');
+         const lvr = document.getElementById('lvr');
+ 
+         function calculateBorrowingPower() {
+             const annualIncome = parseFloat(annualIncomeInput.value);
+             const otherIncome = parseFloat(otherIncomeInput.value);
+             const expenses = parseFloat(expensesInput.value);
+             const interestRate = parseFloat(interestRateBorrowingInput.value) / 100 / 12;
+             const loanTerm = parseFloat(loanTermBorrowingInput.value) * 12;
+ 
+             // Simple calculation (in reality this would be more complex)
+             const totalIncome = annualIncome + otherIncome;
+             const disposableIncome = (totalIncome / 12) - expenses;
+ 
+             // Estimate borrowing power (using a simplified 30% rule)
+             const estimatedBorrowing = (disposableIncome * 0.3) * (loanTerm / interestRate);
+ 
+             // Calculate estimated monthly repayment for this amount
+             const x = Math.pow(1 + interestRate, loanTerm);
+             const monthly = (estimatedBorrowing * x * interestRate) / (x - 1);
+ 
+             // Update display
+             borrowingPower.textContent = `$${Math.round(estimatedBorrowing / 10000) * 10000}`;
+             estimatedRepayment.textContent = `$${monthly.toFixed(0)}`;
+             lvr.textContent = '80%'; // Standard LVR
+         }
+ 
+         annualIncomeInput.addEventListener('input', () => {
+             annualIncomeValue.textContent = `$${parseInt(annualIncomeInput.value).toLocaleString()}`;
+             calculateBorrowingPower();
+         });
+ 
+         otherIncomeInput.addEventListener('input', () => {
+             otherIncomeValue.textContent = `$${parseInt(otherIncomeInput.value).toLocaleString()}`;
+             calculateBorrowingPower();
+         });
+ 
+         expensesInput.addEventListener('input', () => {
+             expensesValue.textContent = `$${parseInt(expensesInput.value).toLocaleString()}`;
+             calculateBorrowingPower();
+         });
+ 
+         interestRateBorrowingInput.addEventListener('input', () => {
+             interestRateBorrowingValue.textContent = `${parseFloat(interestRateBorrowingInput.value).toFixed(1)}%`;
+             calculateBorrowingPower();
+         });
+ 
+         loanTermBorrowingInput.addEventListener('input', () => {
+             loanTermBorrowingValue.textContent = `${parseInt(loanTermBorrowingInput.value)} years`;
+             calculateBorrowingPower();
+         });
+ 
+         // Initialize borrowing power calculator
+         calculateBorrowingPower();
+ 
+         // Stamp Duty Calculator Logic
+         const propertyValueInput = document.getElementById('property-value');
+         const propertyTypeInput = document.getElementById('property-type');
+         const firstHomeBuyerInput = document.getElementById('first-home-buyer');
+         const stateInput = document.getElementById('state');
+ 
+         const propertyValueValue = document.getElementById('property-value-value');
+         const stampDutyAmount = document.getElementById('stamp-duty-amount');
+         const concession = document.getElementById('concession');
+         const totalPayable = document.getElementById('total-payable');
+ 
+         function calculateStampDuty() {
+             const propertyValue = parseFloat(propertyValueInput.value);
+             const propertyType = propertyTypeInput.value;
+             const isFirstHomeBuyer = firstHomeBuyerInput.value === 'yes';
+             const state = stateInput.value;
+ 
+             // Simplified stamp duty calculation (Victoria rates as default)
+             let duty = 0;
+             let concessionAmount = 0;
+ 
+             if (state === 'vic') {
+                 // Victoria stamp duty rates
+                 if (propertyValue <= 130000) {
+                     duty = propertyValue * 0.014;
+                 } else if (propertyValue <= 960000) {
+                     duty = 1820 + (propertyValue - 130000) * 0.06;
+                 } else {
+                     duty = 50000 + (propertyValue - 960000) * 0.055;
+                 }
+ 
+                 // First home buyer concession in Victoria
+                 if (isFirstHomeBuyer && propertyType === 'established' && propertyValue <= 600000) {
+                     concessionAmount = duty * 0.5; // 50% concession
+                 } else if (isFirstHomeBuyer && propertyType === 'new' && propertyValue <= 750000) {
+                     concessionAmount = duty * 0.5; // 50% concession
+                 } else if (isFirstHomeBuyer && propertyType === 'vacant-land' && propertyValue <= 300000) {
+                     concessionAmount = duty * 0.5; // 50% concession
+                 }
+             } else if (state === 'nsw') {
+                 // NSW stamp duty rates (simplified)
+                 if (propertyValue <= 14250) {
+                     duty = 0;
+                 } else if (propertyValue <= 54000) {
+                     duty = (propertyValue - 14250) * 0.0125;
+                 } else if (propertyValue <= 227000) {
+                     duty = 500 + (propertyValue - 54000) * 0.015;
+                 } else if (propertyValue <= 1055000) {
+                     duty = 3095 + (propertyValue - 227000) * 0.04;
+                 } else if (propertyValue <= 3000000) {
+                     duty = 36295 + (propertyValue - 1055000) * 0.055;
+                 } else {
+                     duty = 143095 + (propertyValue - 3000000) * 0.07;
+                 }
+ 
+                 // First home buyer concession in NSW
+                 if (isFirstHomeBuyer && propertyValue <= 800000) {
+                     concessionAmount = duty * 0.5; // 50% concession
+                 }
+             }
+ 
+             // Update display
+             stampDutyAmount.textContent = `$${Math.round(duty).toLocaleString()}`;
+             concession.textContent = `$${Math.round(concessionAmount).toLocaleString()}`;
+             totalPayable.textContent = `$${Math.round(duty - concessionAmount).toLocaleString()}`;
+         }
+ 
+         propertyValueInput.addEventListener('input', () => {
+             propertyValueValue.textContent = `$${parseInt(propertyValueInput.value).toLocaleString()}`;
+             calculateStampDuty();
+         });
+ 
+         propertyTypeInput.addEventListener('change', calculateStampDuty);
+         firstHomeBuyerInput.addEventListener('change', calculateStampDuty);
+         stateInput.addEventListener('change', calculateStampDuty);
+ 
+         // Initialize stamp duty calculator
+         calculateStampDuty();*/
     </script>
 </body>
 
